@@ -5,27 +5,33 @@ function sortear() {
     let sorteados = [];
     let numero;
 
-    if (de > ate) {
+    if (de >= ate) {
         alert('Valor incorreto no campo "Do número", número não pode ser maior que o campo "Até o número"');
-    } else {
-        // sorteia um numero por vez enquanto não chegar no numero dentro da variavel quantidade
-        for (let i = 0; i < quantidade; i++) {
-        //sorteia um numero aleatorio
-        numero = obterNumeroAleatorio(de, ate);
+    }
 
-        //verifica se o numero ja foi sorteado, se verdadeiro sorteia outro numero
-        while (sorteados.includes(numero)) { 
-            numero = obterNumeroAleatorio(de, ate);      
-        }
-        //coloca dentro do array os numero que estão sendo sorteados
-        sorteados.push(numero);
+    if (quantidade > (ate - de + 1)) {
+        alert('Campo "Quantidade" deve ser menor ou igual ao intervalo informado no campo "Do número" até o campo "Até o número". Verifique!');
+        return;
+    }
+    
+    // sorteia um numero por vez enquanto não chegar no numero dentro da variavel quantidade
+    for (let i = 0; i < quantidade; i++) {
+    //sorteia um numero aleatorio
+    numero = obterNumeroAleatorio(de, ate);
+
+    //verifica se o numero ja foi sorteado, se verdadeiro sorteia outro numero
+    while (sorteados.includes(numero)) { 
+        numero = obterNumeroAleatorio(de, ate);    
+    }
+    //coloca dentro do array os numero que estão sendo sorteados
+    sorteados.push(numero);
     }
 
     let resultado = document.getElementById('resultado');
     resultado.innerHTML = `<label class="texto__paragrafo">Números sorteados: ${sorteados}</label>`
 
     alterarStatusBotao();
-    }
+    
 
     
 }
